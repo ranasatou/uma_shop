@@ -1,0 +1,8 @@
+<div id="category">
+    <ul>
+        <li><a href="{{constant('uma_shop\\Bootstrap::ENTRY_URL')}}list.php">全て</a></li>
+            {% for value in cateArr %}
+        <li><a href="{{constant('uma_shop\\Bootstrap::ENTRY_URL')}}list.php?ctg_id={{value.ctg_id}}">{{value.category_name}}</a></li>
+            {% endfor %}
+    </ul>
+</div>

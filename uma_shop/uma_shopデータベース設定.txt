@@ -1,0 +1,71 @@
+﻿uma_shopデータベース設定
+
+mysql -u root
+create database uma_shop default character set utf8;
+
+grant all privileges on uma_shop. * to uma_shop_user@'localhost' identified by 'uma_shop_pass' with grant option;
+
+use uma_shop;
+
+//商品テーブル
+CREATE TABLE item (
+	item_id int unsigned not null auto_increment,
+	item_name varchar(100) not null,
+	detail text not null,
+	price DECIMAL(10,3) unsigned not null,
+	image varchar(50) not null,
+	ctg_id tinyint unsigned not null,
+	primary key( item_id ),
+	index item_idx( ctg_id )
+);
+
+//デシマル：decimal(最大桁数、小数点以下の桁数)
+//インデックス：データの検索速度を向上させるために、
+	どの行がどこにあるか示した索引のこと
+
+
+CREATE TABLE cart (
+	crt_id int unsigned not null auto_increment,
+	customer_no int unsigned not null,
+	item_id int unsigned not null,
+	num tinyint(1) unsigned not null default 1,
+	delete_flg tinyint(1) unsigned not null default 0,
+	primary key( crt_id ),
+	index crt_idx( customer_no, delete_flg )
+);
+
+//カテゴリー
+CREATE TABLE category (
+	ctg_id tinyint(1) unsigned not null default 0,
+	category_name varchar(100) not null,
+	primary key(ctg_id)
+);
+
+//顧客の認識
+CREATE TABLE session(
+	customer_no int unsigned not null auto_increment,
+	session_key varchar(32),
+	primary key(customer_no)
+);
+
+
+INSERT INTO category VALUES ( 1, 'womensウェア' );
+INSERT INTO category VALUES ( 2, 'mensウェア' );
+INSERT INTO category VALUES ( 3, 'kidsウェア' );
+INSERT INTO category VALUES ( 4, '馬具' );
+INSERT INTO category VALUES ( 5, 'uma小物' );
+INSERT INTO item VALUES ( 1,  '競技用ウェア', '流行の最先端。スタイリッシュ', 70000, 'women1.jpg', 1 );
+INSERT INTO item VALUES ( 2,  'ジャケット', '冬にあたたかい、キルティング素材', 15000, 'women2.jpg', 1 );
+INSERT INTO item VALUES ( 3,  'サングラス', 'かっこよく', 5000, 'women3.jpg', 1 );
+INSERT INTO item VALUES ( 4,  '障害競技用ウェア',     'ジャンプに適した柔らかい素材', 100000, 'men1.jpg', 2 );
+INSERT INTO item VALUES ( 5,  '馬場馬術競技用ウェア', '世界選手権でも着れる燕尾服', 100000, 'men2.jpg', 2 );
+INSERT INTO item VALUES ( 6,  'チェックシャツ', '普段着に。カジュアルハンサム', 15000, 'men3.jpg', 2 );
+INSERT INTO item VALUES ( 7,  'はじめてセット', 'ヘルメット、キュロット、プロテクター、ブーツ、鞭の5点セット', 130000, 'kids1', 3 );
+INSERT INTO item VALUES ( 8,  'ヘルメット', 'どんなファッションも合うブラックカラーのヘルメット', 25000, 'kids2.jpg', 3 );
+INSERT INTO item VALUES ( 9,  'ウェスタンハット','ウェスタンでかっこよく', 12000, 'kids3.jpg', 3 );
+INSERT INTO item VALUES ( 10, '大絡','2本手綱の頭絡です', 120000, 'bagu1.jpg', 4 );
+INSERT INTO item VALUES ( 11, 'すい絡','1本手綱の頭絡です', 80000, 'bagu2.jpg', 4 );
+INSERT INTO item VALUES ( 12, '鞍', '人気のpassherの鞍です', 500000, 'bagu3.jpg', 4 );
+INSERT INTO item VALUES ( 13, '手入れブラシ','普段の馬のお手入れに', 1200, 'komono1.jpg', 5 );
+INSERT INTO item VALUES ( 14, '拍車','シンプルなデザイン。長さ3cmm', 2000, 'komono2.jpg', 5 );
+INSERT INTO item VALUES ( 15, '白グローブ', '馬場馬術競技にも使用できる白グローブ', 10000, 'komono3.jpg', 5 );

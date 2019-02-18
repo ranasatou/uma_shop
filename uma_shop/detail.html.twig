@@ -1,0 +1,31 @@
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<script language="JavaScript" type="text/javascript" src="{{constant('uma_shop\\Bootstrap::APP_URL')}}js/jquery-3.2.1.min.js"></script>
+		<script language="JavaScript" type="text/javascript" src="{{constant('uma_shop\\Bootstrap::APP_URL')}}js/shopping.js"></script>
+		<link href="{{constant('uma_shop\\Bootstrap::APP_URL')}}css/shopping.css" rel="stylesheet" type="text/css" />
+	</head>
+	<body>
+		<input type="hidden" name="entry_url" value="{{constant('uma_shop\\Bootstrap::ENTRY_URL')}}" id="entry_url" >
+		<div id="wrapper">
+            {% include 'category_menu.html.twig' %}
+            <div id="item_detail">
+                <div class="image">
+                    <img src="{{constant('uma_shop\\Bootstrap::ENTRY_URL')}}images/{{itemData.image}}" alt="{{itemData.item_name}}" />
+                </div>
+                <div class="detail">
+                    <dl>
+                        <dt>商品名</dt><dd>{{itemData.item_name}}</dd>
+                        <dt>詳細</dt><dd>{{itemData.detail}}</dd>
+                        <dt>価格</dt><dd>&yen;{{itemData.price|number_format(0, '.', ',' )}}</dd>
+                        <input type="hidden" name="item_id" id="item_id" value="{{itemData.item_id}}">
+                    </dl>
+                </div>
+                <div class="cart_in">
+                    <input type="button" name="back" value="一覧へ戻る" onclick="history.back(); return false;" />
+                    <input type="button" name="cart_in" value="ショッピングカートへ入れる" id="cart_in" />
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

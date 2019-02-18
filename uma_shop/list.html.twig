@@ -1,0 +1,26 @@
+<html>
+	<head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <link href="{{constant('uma_shop\\Bootstrap::APP_URL')}}css/shopping.css" rel="stylesheet" type="text/css" />
+    </head>
+        <body>
+            <div id="wrapper">
+                {% include 'category_menu.html.twig' %}
+                <div id="item_list">
+                    {% for value in dataArr %}
+                        <div class="item">
+                            <ul>
+                                <li class="name">
+                                    <a href="{{constant('uma_shop\\Bootstrap::ENTRY_URL')}}detail.php?item_id={{value.item_id}}">{{value.item_name}}</a></li>
+                                <li class="price">&yen;{{value.price|number_format(0, '.', ',')}}</li>
+                                <li class="image">
+                                    <a href="{{constant('uma_shop\\Bootstrap::ENTRY_URL')}}detail.php?item_id={$value.item_id}"><img src="{{constant('uma_shop\\Bootstrap::ENTRY_URL')}}images/{{value.image}}" alt="{{value.item_name}}" /></a></li>
+                                <li class="detail">
+                                    <a href="{{constant('uma_shop\\Bootstrap::ENTRY_URL')}}detail.php?item_id={{value.item_id}}">詳細</a></li>
+                            </ul>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </body>
+</html>

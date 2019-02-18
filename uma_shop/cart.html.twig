@@ -1,0 +1,32 @@
+<html>
+	<head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <link href="{{constant('uma_shop\\Bootstrap::APP_URL')}}css/shopping.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <div id="wrapper">
+            <div id="cart_list">
+                <p>ショッピングカート</p>
+                <p><a href="{{constant('uma_shop\Bootstrap::ENTRY_URL')}}list.php">商品一覧へ戻る</a></p>
+                <p>カート内商品数: {{sumNum}}個　合計金額：　&yen;{{sumPrice|number_format(0, '.', ',')}}</p>
+                {% if dataArr | length == 0 %}
+                    <p>カートに商品は入っていません</p>
+                    {% else %}
+                        {% for value in dataArr %}
+                            <div class="item">
+                                <ul>
+                                    <li class="image"><img
+                                    src="{{constant('uma_shop\\Bootstrap::ENTRY_URL')}}images/{{value.image}}" 
+                                    alt="{{value. item_name}}" /></li>
+                                    <li class="name">{{value. item_name}}</li>
+                                    <li class="price">&yen;{{value.price|number_format(0, '.', ',')}}</li>
+
+                                    <li><a href="{{constant('uma_shop\\Bootstrap::ENTRY_URL')}}cart.php?crt_id={{value.crt_id}}">削除</a></li>
+                                </ul>
+                            </div>
+                        {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </body>
+</html>
